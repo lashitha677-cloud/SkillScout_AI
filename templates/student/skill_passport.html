@@ -1,0 +1,659 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Skill Passport | SkillScout AI</title>
+
+    <link rel="stylesheet"
+          href="{% static 'css/skill_passport.css' %}">
+
+</head>
+
+<body>
+
+<div class="passport-page">
+
+    <!-- HEADER -->
+
+    <header class="topbar">
+
+        <div class="brand">
+            ✦ SkillScout <span>AI</span>
+        </div>
+
+        <div class="user-area">
+
+            <div class="avatar">
+                {{ request.user.username|first|upper }}
+            </div>
+
+            <div>
+
+                <strong>
+                    {{ request.user.username }}
+                </strong>
+
+                <small>
+                    Student
+                </small>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- MAIN -->
+
+    <main class="passport-container">
+
+
+        <!-- WELCOME -->
+
+        <div class="welcome">
+
+            <div>
+
+                <span class="badge">
+                    ✦ STUDENT PROFILE
+                </span>
+
+                <h1>
+                    My Skill Passport
+                </h1>
+
+                <p>
+                    Build your digital talent profile and
+                    let SkillScout AI discover opportunities
+                    that match your skills.
+                </p>
+
+            </div>
+
+
+            <div class="profile-score">
+
+                <div class="score">
+                    {{ skills|length }}
+                </div>
+
+                <span>
+                    Skills Added
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- PROFILE INFORMATION -->
+
+        <section class="profile-card">
+
+            <div class="section-title">
+
+                <div>
+
+                    <h2>
+                        Profile Information
+                    </h2>
+
+                    <p>
+                        Your basic academic information
+                    </p>
+
+                </div>
+                <a href="{% url 'edit_profile' %}" class="edit-button">
+                    ✎ Edit Profile
+                </a>    
+
+            </div>
+
+
+            <div class="profile-grid">
+
+
+                <div class="info-box">
+
+                    <label>
+                        Username
+                    </label>
+
+                    <strong>
+                        {{ request.user.username }}
+                    </strong>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <label>
+                        Department
+                    </label>
+
+                    <strong>
+                        {{ profile.department|default:"Not added" }}
+                    </strong>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <label>
+                        Year
+                    </label>
+
+                    <strong>
+                        {{ profile.year|default:"Not added" }}
+                    </strong>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <label>
+                        Phone
+                    </label>
+
+                    <strong>
+                        {{ profile.phone|default:"Not added" }}
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- SKILLS -->
+
+        <section class="skills-section">
+
+            <div class="section-title">
+
+                <div>
+
+                    <h2>
+                        My Technical Skills
+                    </h2>
+
+                    <p>
+                        Skills that SkillScout AI will use
+                        for opportunity matching.
+                    </p>
+
+                </div>
+
+
+                <button
+                    class="add-button"
+                    onclick="openSkillForm()">
+
+                    + Add Skill
+
+                </button>
+
+            </div>
+
+
+            <div class="skills-grid">
+
+    {% for skill in skills %}
+
+        <div class="skill-card">
+
+            <div class="skill-icon">
+                ✦
+            </div>
+
+            <div class="skill-info">
+
+                <h3>
+                    {{ skill.skill_name }}
+                </h3>
+
+                <span>
+                    {{ skill.skill_level }}
+                </span>
+
+            </div>
+
+            <div class="experience">
+                {{ skill.years_experience }} yrs
+            </div>
+
+            <a
+                href="{% url 'edit_skill' skill.id %}"
+                class="edit-skill">
+
+                ✎ Edit
+
+            </a>
+
+        </div>
+
+    {% empty %}
+
+        <div class="empty-state">
+
+            <div class="empty-icon">
+                ✦
+            </div>
+
+            <h3>
+                No skills added yet
+            </h3>
+
+            <p>
+                Start building your Skill Passport
+                by adding your first skill.
+            </p>
+
+            <button
+                class="add-button"
+                onclick="openSkillForm()">
+
+                + Add Your First Skill
+
+            </button>
+
+        </div>
+
+    {% endfor %}
+
+</div>
+
+        </section>
+
+
+        <!-- AI MESSAGE -->
+
+        <section class="ai-card">
+
+            <div class="ai-icon">
+                ✦
+            </div>
+
+
+            <div>
+
+                <span>
+                    SKILLSCOUT AI
+                </span>
+
+                <h2>
+                    Your skills power your opportunities.
+                </h2>
+
+                <p>
+                    Once your Skill Passport is complete,
+                    Scout can analyze your profile and
+                    recommend hackathons, interviews,
+                    competitions and other opportunities.
+                </p>
+
+            </div>
+
+        </section>
+
+        <!-- PROJECTS SECTION -->
+
+<section class="portfolio-section">
+
+    <div class="section-header">
+
+        <div>
+
+            <h2>
+                🚀 My Projects
+            </h2>
+
+            <p>
+                Projects you have built and worked on.
+            </p>
+
+        </div>
+
+        <a
+            class="portfolio-add"
+            href="{% url 'student_projects' %}">
+
+            + Add Project
+
+        </a>
+
+    </div>
+
+
+    {% if projects %}
+
+        <div class="portfolio-grid">
+
+            {% for project in projects %}
+
+<div class="portfolio-card">
+
+    <h3>
+        {{ project.project_title }}
+    </h3>
+
+    <p>
+        {{ project.description }}
+    </p>
+
+    {% if project.technologies %}
+
+        <span class="portfolio-tech">
+            🛠 {{ project.technologies }}
+        </span>
+
+    {% endif %}
+
+    <div class="project-actions">
+
+        <a
+            href="{% url 'edit_project' project.id %}"
+            class="edit-project">
+
+            ✎ Edit Project
+
+        </a>
+
+    </div>
+
+</div>
+
+{% endfor %}
+
+        </div>
+
+    {% else %}
+
+        <div class="portfolio-empty">
+
+            <h3>
+                No projects added yet
+            </h3>
+
+            <p>
+                Showcase your work by adding your first project.
+            </p>
+
+            <a href="{% url 'student_projects' %}">
+                + Add Your First Project
+            </a>
+
+        </div>
+
+    {% endif %}
+
+</section>
+
+
+        <!-- CERTIFICATIONS SECTION -->
+
+<section class="portfolio-section">
+
+    <div class="section-header">
+
+        <div>
+
+            <h2>
+                🏆 My Certifications
+            </h2>
+
+            <p>
+                Certificates and achievements you have earned.
+            </p>
+
+        </div>
+
+        <a
+            class="portfolio-add"
+            href="{% url 'student_certifications' %}">
+
+            + Add Certification
+
+        </a>
+
+    </div>
+
+
+    {% if certifications %}
+
+        <div class="portfolio-grid">
+
+            {% for certificate in certifications %}
+
+                <div class="portfolio-card">
+
+    <h3>
+        {{ certificate.certificate_name }}
+    </h3>
+
+    <p>
+        {{ certificate.issuing_organization }}
+    </p>
+
+    {% if certificate.issue_year %}
+
+        <span class="portfolio-tech">
+            📅 Issued: {{ certificate.issue_year }}
+        </span>
+    {% endif %}
+
+    <div class="portfolio-actions">
+
+        <a
+            href="{% url 'edit_certification' certificate.id %}"
+            class="edit-portfolio">
+
+            ✎ Edit Certification
+
+        </a>
+
+    </div>
+
+</div>
+
+            {% endfor %}
+
+        </div>
+
+    {% else %}
+
+        <div class="portfolio-empty">
+
+            <h3>
+                No certifications added yet
+            </h3>
+
+            <p>
+                Add your certificates and achievements
+                to strengthen your profile.
+            </p>
+
+            <a href="{% url 'student_certifications' %}">
+
+                + Add Your First Certification
+
+            </a>
+
+        </div>
+
+    {% endif %}
+
+</section>
+
+
+<!-- BACK TO DASHBOARD -->
+
+<div class="dashboard-back">
+    <a href="{% url 'student_dashboard' %}">
+        ← Back to Dashboard
+    </a>
+</div>
+
+
+    <!-- CHATBOT BUTTON -->
+
+    <a href="{% url 'ai_assistant' %}" class="chat-button">
+
+    ✦
+
+    <span>
+        Ask Scout
+    </span>
+
+    </a>
+
+</div>
+
+
+<!-- ADD SKILL MODAL -->
+
+<div id="skillModal" class="modal">
+
+    <div class="modal-content">
+
+
+        <div class="modal-header">
+
+            <div>
+
+                <span>
+                    SKILLSCOUT AI
+                </span>
+
+                <h2>
+                    Add Technical Skill
+                </h2>
+
+                <p>
+                    Add a skill to your Skill Passport.
+                </p>
+
+            </div>
+
+
+            <button
+                class="close-button"
+                onclick="closeSkillForm()">
+
+                ×
+
+            </button>
+
+        </div>
+
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+
+            <div class="form-group">
+
+                <label>
+                    Skill Name
+                </label>
+
+                {{ form.skill_name }}
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Skill Level
+                </label>
+
+                {{ form.skill_level }}
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Years of Experience
+                </label>
+
+                {{ form.years_experience }}
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="save-button">
+
+                Save Skill
+
+            </button>
+
+
+        </form>
+
+
+    </div>
+
+</div>
+
+
+<!-- JAVASCRIPT -->
+
+<script>
+
+function openSkillForm() {
+
+    document.getElementById(
+        "skillModal"
+    ).style.display = "flex";
+
+}
+
+
+function closeSkillForm() {
+
+    document.getElementById(
+        "skillModal"
+    ).style.display = "none";
+
+}
+
+
+window.onclick = function(event) {
+
+    const modal =
+        document.getElementById("skillModal");
+
+    if (event.target === modal) {
+
+        modal.style.display = "none";
+
+    }
+
+}
+
+</script>
+
+
+</body>
+
+</html>

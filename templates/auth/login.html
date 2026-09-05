@@ -1,0 +1,204 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login | SkillScout AI</title>
+
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+</head>
+
+<body>
+
+<div class="login-container">
+
+    <!-- LEFT SIDE -->
+
+    <div class="login-info">
+
+        <div class="brand">
+            <span>✦</span>
+            SkillScout <b>AI</b>
+        </div>
+
+        <div class="info-content">
+
+            <div class="ai-badge">
+                ✦ AI-POWERED TALENT DISCOVERY
+            </div>
+
+            <h1>
+                Discover your
+                <span>potential.</span>
+            </h1>
+
+            <p>
+                Connect your skills with the right opportunities.
+                SkillScout AI intelligently helps colleges discover
+                and develop student talent.
+            </p>
+
+            <div class="mini-stats">
+
+                <div>
+                    <strong>AI</strong>
+                    <small>Smart Matching</small>
+                </div>
+
+                <div>
+                    <strong>3×</strong>
+                    <small>Faster Discovery</small>
+                </div>
+
+                <div>
+                    <strong>24/7</strong>
+                    <small>Talent Insights</small>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- RIGHT SIDE -->
+
+    <div class="login-section">
+
+        <div class="login-card">
+
+            <div class="mobile-logo">
+                ✦ SkillScout <b>AI</b>
+            </div>
+
+            <h2>Welcome back</h2>
+
+            <p class="subtitle">
+                Sign in to access your SkillScout dashboard
+            </p>
+
+
+            <form method="POST">
+
+    {% csrf_token %}
+
+    <!-- USERNAME -->
+
+    <div class="input-group">
+
+        <label>Username</label>
+
+        <input
+            type="text"
+            name="username"
+            placeholder="Enter your username"
+            required
+        >
+
+    </div>
+
+
+    <!-- PASSWORD -->
+
+    <div class="input-group">
+
+        <div class="password-label">
+
+            <label>Password</label>
+
+            <a href="#">Forgot password?</a>
+
+        </div>
+
+        <input
+            type="password"
+            name="password"
+            placeholder="Enter your password"
+            required
+        >
+
+    </div>
+
+
+    <!-- ROLE -->
+
+    <div class="input-group">
+
+        <label>Role</label>
+
+        <select name="role" required>
+
+            <option value="">
+                Select your role
+            </option>
+
+            <option value="STUDENT">
+                Student
+            </option>
+
+            <option value="STAFF">
+                Staff
+            </option>
+
+            <option value="HOD">
+                HOD
+            </option>
+
+        </select>
+
+    </div>
+
+
+    <!-- ERROR -->
+
+    {% if error %}
+
+    <div class="error-message">
+        {{ error }}
+    </div>
+
+    {% endif %}
+
+
+    <!-- SIGN IN -->
+
+    <button type="submit">
+
+        Sign in
+
+        <span>→</span>
+
+    </button>
+
+</form>
+
+
+            <div class="security">
+
+                <span>🔒</span>
+
+                <p>
+                    Your information is securely protected.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <p class="bottom-text">
+            SkillScout AI · Intelligent Student Talent Discovery
+        </p>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

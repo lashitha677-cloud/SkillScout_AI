@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Delete Opportunity | SkillScout AI</title>
+
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            background: #070b16;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card {
+            width: 90%;
+            max-width: 500px;
+            padding: 30px;
+            background: #10172a;
+            border: 1px solid #202941;
+            border-radius: 18px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 24px;
+        }
+
+        p {
+            color: #737d94;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .actions {
+            margin-top: 25px;
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        button,
+        a {
+            padding: 11px 16px;
+            border-radius: 9px;
+            font-size: 11px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        button {
+            border: none;
+            background: #8f3042;
+            color: white;
+            cursor: pointer;
+        }
+
+        .cancel {
+            background: #191c35;
+            border: 1px solid #293249;
+            color: #aaa0ff;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="card">
+
+    <h1>Delete Opportunity?</h1>
+
+    <p>
+        Are you sure you want to delete
+        <strong>{{ opportunity.title }}</strong>?
+        This action cannot be undone.
+    </p>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <div class="actions">
+
+            <button type="submit">
+                Yes, Delete
+            </button>
+
+            <a
+                href="{% url 'edit_opportunity' opportunity.id %}"
+                class="cancel"
+            >
+                Cancel
+            </a>
+
+        </div>
+
+    </form>
+
+</div>
+
+</body>
+
+</html>

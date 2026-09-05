@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Edit Project | SkillScout AI</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+
+            font-family: Arial, sans-serif;
+
+            background: #070b16;
+            color: white;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 650px;
+
+            margin: auto;
+
+            padding: 60px 0;
+        }
+
+        .header span {
+            color: #8879ff;
+
+            font-size: 10px;
+            letter-spacing: 1px;
+        }
+
+        .header h1 {
+            margin: 8px 0;
+
+            font-size: 32px;
+        }
+
+        .header p {
+            color: #737d94;
+
+            font-size: 12px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            padding: 30px;
+
+            background: #10172a;
+
+            border: 1px solid #202941;
+
+            border-radius: 18px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+
+            margin-bottom: 7px;
+
+            color: #aeb5c5;
+
+            font-size: 11px;
+
+            font-weight: bold;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+
+            padding: 12px;
+
+            border: 1px solid #293249;
+
+            border-radius: 9px;
+
+            outline: none;
+
+            background: #0b1120;
+
+            color: white;
+
+            font-size: 12px;
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        input:focus,
+        textarea:focus {
+            border-color: #6c5ce7;
+        }
+
+        .buttons {
+            display: flex;
+
+            gap: 12px;
+
+            margin-top: 25px;
+        }
+
+        .save-button,
+        .delete-button,
+        .back-button {
+            padding: 12px 18px;
+
+            border-radius: 9px;
+
+            font-size: 11px;
+
+            font-weight: bold;
+
+            text-decoration: none;
+
+            cursor: pointer;
+        }
+
+        .save-button {
+            border: none;
+
+            background: #6c5ce7;
+
+            color: white;
+        }
+
+        .save-button:hover {
+            background: #7969ee;
+        }
+
+        .delete-button {
+            border: none;
+
+            background: #321923;
+
+            color: #ff8d9b;
+        }
+
+        .delete-button:hover {
+            background: #4a202c;
+        }
+
+        .back-button {
+            border: 1px solid #293249;
+
+            background: #0b1120;
+
+            color: #aeb5c5;
+        }
+
+        .back-button:hover {
+            border-color: #6c5ce7;
+
+            color: white;
+        }
+
+        @media (max-width: 600px) {
+
+            .buttons {
+                flex-direction: column;
+            }
+
+            .save-button,
+            .delete-button,
+            .back-button {
+                width: 100%;
+                text-align: center;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+
+    <div class="header">
+
+        <span>SKILLSCOUT AI</span>
+
+        <h1>Edit Project</h1>
+
+        <p>
+            Update your project information or
+            remove this project from your Skill Passport.
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            {{ form.as_p }}
+
+
+            <div class="buttons">
+
+                <button
+                    type="submit"
+                    class="save-button">
+
+                    ✓ Save Changes
+
+                </button>
+
+
+                <a
+                    href="{% url 'delete_project' project.id %}"
+                    class="delete-button">
+
+                    🗑 Delete Project
+
+                </a>
+
+
+                <a
+                    href="{% url 'student_projects' %}"
+                    class="back-button">
+
+                    ← Cancel
+
+                </a>
+
+            </div>
+
+        </form>
+
+
+    </div>
+
+
+</div>
+
+</body>
+
+</html>

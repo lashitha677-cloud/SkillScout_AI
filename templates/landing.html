@@ -1,0 +1,510 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SkillScout AI | Discover Talent. Match Opportunities.</title>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+
+    <!-- ==================== NAVBAR ==================== -->
+
+    <header class="navbar">
+
+        <div class="logo">
+            <span class="logo-icon">✦</span>
+            SkillScout <span>AI</span>
+        </div>
+
+        <nav>
+            <a href="#features">Features</a>
+            <a href="#how-it-works">How it Works</a>
+            <a href="#about">About</a>
+        </nav>
+
+        <div class="nav-actions">
+
+            <a href="{% url 'login' %}" class="login-btn">
+                Login
+            </a>
+
+            <a href="{% url 'login' %}" class="get-started">
+                Get Started
+            </a>
+
+        </div>
+
+    </header>
+
+
+    <!-- ==================== HERO ==================== -->
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <div class="badge">
+                <span>✦</span>
+                AI-Powered Student Talent Discovery
+            </div>
+
+            <h1>
+                Discover Talent.
+                <br>
+                <span>Match Opportunities.</span>
+            </h1>
+
+            <p>
+                SkillScout AI intelligently discovers student skills
+                and connects the right talent with the right
+                college opportunities.
+            </p>
+
+            <div class="hero-buttons">
+
+                <a href="{% url 'login' %}" class="primary-btn">
+                    Explore SkillScout
+                    <span>→</span>
+                </a>
+
+                <a href="#how-it-works" class="secondary-btn">
+                    See How It Works
+                </a>
+
+            </div>
+
+            <div class="trust">
+
+                <div>
+                    <strong>AI</strong>
+                    <span>Powered Matching</span>
+                </div>
+
+                <div>
+                    <strong>24/7</strong>
+                    <span>Talent Discovery</span>
+                </div>
+
+                <div>
+                    <strong>100%</strong>
+                    <span>Skill Focused</span>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ==================== AI VISUAL ==================== -->
+
+        <div class="hero-visual">
+
+            <div class="ai-card">
+
+                <div class="card-header">
+
+                    <div>
+                        <small>SKILLSCOUT AI</small>
+                        <h3>Opportunity Analysis</h3>
+                    </div>
+
+                    <div class="status">
+                        ● LIVE
+                    </div>
+
+                </div>
+
+
+                <div class="opportunity">
+
+                    <span class="opportunity-icon">
+                        🏆
+                    </span>
+
+                    <div>
+
+                        <small>
+                            NEW OPPORTUNITY
+                        </small>
+
+                        <strong>
+                            AI Innovation Hackathon
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="scanning">
+
+                    <div class="scan-icon">
+                        ✦
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            AI Agent is scouting talent...
+                        </strong>
+
+                        <small>
+                            Analyzing student skill profiles
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="candidate">
+
+                    <div class="avatar">
+                        A
+                    </div>
+
+                    <div class="candidate-info">
+
+                        <strong>
+                            Student Candidate
+                        </strong>
+
+                        <span>
+                            Python • ML • Django
+                        </span>
+
+                    </div>
+
+                    <div class="match">
+                        96%
+                    </div>
+
+                </div>
+
+
+                <div class="candidate">
+
+                    <div class="avatar second">
+                        S
+                    </div>
+
+                    <div class="candidate-info">
+
+                        <strong>
+                            Student Candidate
+                        </strong>
+
+                        <span>
+                            AI • Data Science • Python
+                        </span>
+
+                    </div>
+
+                    <div class="match">
+                        92%
+                    </div>
+
+                </div>
+
+
+                <div class="ai-footer">
+
+                    <span>✦</span>
+
+                    AI recommendation generated
+
+                    <span class="arrow">
+                        →
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ==================== FEATURES ==================== -->
+
+    <section class="features" id="features">
+
+        <div class="section-title">
+
+            <span>
+                POWERFUL FEATURES
+            </span>
+
+            <h2>
+                Intelligence that discovers
+                <span>hidden talent.</span>
+            </h2>
+
+            <p>
+                SkillScout AI transforms student skills into
+                actionable opportunities.
+            </p>
+
+        </div>
+
+
+        <div class="feature-grid">
+
+
+            <!-- FEATURE 1 -->
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    🧠
+                </div>
+
+                <h3>
+                    AI Skill Discovery
+                </h3>
+
+                <p>
+                    Build intelligent student skill profiles
+                    from projects, certifications and experience.
+                </p>
+
+            </div>
+
+
+            <!-- FEATURE 2 -->
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    🎯
+                </div>
+
+                <h3>
+                    Smart Matching
+                </h3>
+
+                <p>
+                    Match students with opportunities based on
+                    skills, experience and interests.
+                </p>
+
+            </div>
+
+
+            <!-- FEATURE 3 -->
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    🤖
+                </div>
+
+                <h3>
+                    Agentic AI
+                </h3>
+
+                <p>
+                    An AI agent analyzes opportunities,
+                    searches talent and generates recommendations.
+                </p>
+
+            </div>
+
+
+            <!-- FEATURE 4 -->
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    📊
+                </div>
+
+                <h3>
+                    Talent Analytics
+                </h3>
+
+                <p>
+                    Help departments understand the skills
+                    available across their student community.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ==================== HOW IT WORKS ==================== -->
+
+    <section class="how-it-works" id="how-it-works">
+
+        <div class="section-title">
+
+            <span>
+                HOW IT WORKS
+            </span>
+
+            <h2>
+                From opportunity
+                <span>to talent.</span>
+            </h2>
+
+        </div>
+
+
+        <div class="steps">
+
+
+            <!-- STEP 1 -->
+
+            <div class="step">
+
+                <div class="step-number">
+                    01
+                </div>
+
+                <h3>
+                    Opportunity
+                </h3>
+
+                <p>
+                    Staff adds a hackathon, interview,
+                    competition or other opportunity.
+                </p>
+
+            </div>
+
+
+            <!-- STEP 2 -->
+
+            <div class="step">
+
+                <div class="step-number">
+                    02
+                </div>
+
+                <h3>
+                    AI Analysis
+                </h3>
+
+                <p>
+                    The LLM understands the opportunity
+                    and identifies required skills.
+                </p>
+
+            </div>
+
+
+            <!-- STEP 3 -->
+
+            <div class="step">
+
+                <div class="step-number">
+                    03
+                </div>
+
+                <h3>
+                    Talent Scouting
+                </h3>
+
+                <p>
+                    The AI agent searches and ranks
+                    suitable students.
+                </p>
+
+            </div>
+
+
+            <!-- STEP 4 -->
+
+            <div class="step">
+
+                <div class="step-number">
+                    04
+                </div>
+
+                <h3>
+                    HOD Approval
+                </h3>
+
+                <p>
+                    The HOD reviews the recommendations
+                    before students are notified.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ==================== FINAL CTA ==================== -->
+
+    <section class="final-cta">
+
+        <div class="cta-content">
+
+            <div class="cta-badge">
+                ✦ AI-POWERED TALENT DISCOVERY
+            </div>
+
+            <h2>
+                Ready to discover
+                <span>hidden talent?</span>
+            </h2>
+
+            <p>
+                Connect the right students with the right
+                opportunities using intelligent AI-powered matching.
+            </p>
+
+            <a href="{% url 'login' %}" class="cta-button">
+                Get Started
+                <span>→</span>
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- ==================== FOOTER ==================== -->
+
+    <footer id="about">
+
+        <div class="footer-logo">
+
+            <span>✦</span>
+
+            SkillScout <b>AI</b>
+
+        </div>
+
+        <p>
+            Discover Talent. Match Opportunities.
+        </p>
+
+        <span class="copyright">
+            © 2026 SkillScout AI
+        </span>
+
+    </footer>
+
+
+    <!-- ==================== JAVASCRIPT ==================== -->
+
+    <script src="{% static 'js/main.js' %}"></script>
+
+</body>
+
+</html>

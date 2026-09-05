@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Notifications | SkillScout AI</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #070b16;
+            color: white;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 900px;
+            margin: auto;
+            padding: 45px 0 70px;
+        }
+
+        .brand {
+            color: #8879ff;
+            font-size: 10px;
+            font-weight: bold;
+            letter-spacing: 1.5px;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            font-size: 34px;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #737d94;
+            font-size: 13px;
+            margin-bottom: 30px;
+        }
+
+        .notification-list {
+            display: grid;
+            gap: 15px;
+        }
+
+        .notification {
+            padding: 22px;
+            background: #10172a;
+            border: 1px solid #202941;
+            border-radius: 15px;
+        }
+
+        .notification:hover {
+            border-color: #6c5ce7;
+        }
+
+        .notification-title {
+            color: #8879ff;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .notification-message {
+            color: #aeb5c5;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        .notification-date {
+            margin-top: 12px;
+            color: #737d94;
+            font-size: 10px;
+        }
+
+        .empty {
+            padding: 45px 25px;
+            text-align: center;
+            background: #10172a;
+            border: 1px dashed #293249;
+            border-radius: 15px;
+        }
+
+        .empty h3 {
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+
+        .empty p {
+            color: #737d94;
+            font-size: 11px;
+        }
+
+        .back {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 10px 15px;
+
+            background: #10172a;
+            border: 1px solid #202941;
+            border-radius: 9px;
+
+            color: #aeb5c5;
+            text-decoration: none;
+            font-size: 11px;
+        }
+
+        .back:hover {
+            border-color: #6c5ce7;
+            color: white;
+        }
+
+        @media (max-width: 600px) {
+
+            .container {
+                width: 92%;
+                padding-top: 30px;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+    <div class="brand">
+        ✦ SKILLSCOUT AI · STUDENT
+    </div>
+
+    <h1>Notifications</h1>
+
+    <p class="subtitle">
+        Stay updated about your opportunity matches and recommendations.
+    </p>
+
+
+    <div class="notification-list">
+
+        {% for notification in notifications %}
+
+        <div class="notification">
+
+            <div class="notification-title">
+                🔔 {{ notification.title }}
+            </div>
+
+            <div class="notification-message">
+                {{ notification.message }}
+            </div>
+
+            <div class="notification-date">
+                {{ notification.created_at|date:"d M Y, h:i A" }}
+            </div>
+
+        </div>
+
+        {% empty %}
+
+        <div class="empty">
+
+            <h3>No notifications yet</h3>
+
+            <p>
+                Your opportunity matches and updates will appear here.
+            </p>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+
+    <a
+        href="{% url 'student_dashboard' %}"
+        class="back"
+    >
+        ← Back to Student Dashboard
+    </a>
+
+</div>
+
+</body>
+
+</html>

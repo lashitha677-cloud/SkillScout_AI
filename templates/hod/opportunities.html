@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>HOD Opportunities | SkillScout AI</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #070b16;
+            color: white;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: auto;
+            padding: 45px 0 70px;
+        }
+
+        .header {
+            margin-bottom: 30px;
+        }
+
+        .brand {
+            color: #8879ff;
+            font-size: 10px;
+            font-weight: bold;
+            letter-spacing: 1.5px;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            font-size: 34px;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #737d94;
+            font-size: 13px;
+        }
+
+        .section {
+            background: #10172a;
+            border: 1px solid #202941;
+            border-radius: 18px;
+            padding: 28px;
+        }
+
+        .section h2 {
+            font-size: 20px;
+            margin-bottom: 6px;
+        }
+
+        .section-text {
+            color: #737d94;
+            font-size: 11px;
+            margin-bottom: 25px;
+        }
+
+        .opportunity-list {
+            display: grid;
+            gap: 15px;
+        }
+
+        .opportunity-card {
+            background: #0b1120;
+            border: 1px solid #202941;
+            border-radius: 14px;
+            padding: 22px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .opportunity-card:hover {
+            border-color: #6c5ce7;
+        }
+
+        .opportunity-info h3 {
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+
+        .description {
+            color: #737d94;
+            font-size: 11px;
+            margin-bottom: 12px;
+        }
+
+        .skills {
+            color: #aaa0ff;
+            font-size: 10px;
+        }
+
+        .select-button {
+            display: inline-block;
+            padding: 10px 15px;
+            background: #6c5ce7;
+            color: white;
+            border-radius: 9px;
+            text-decoration: none;
+            font-size: 11px;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .select-button:hover {
+            background: #7969ee;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-top: 22px;
+            padding: 10px 15px;
+
+            background: #10172a;
+            border: 1px solid #202941;
+            color: #aeb5c5;
+
+            border-radius: 9px;
+            text-decoration: none;
+            font-size: 11px;
+        }
+
+        .back-button:hover {
+            border-color: #6c5ce7;
+            color: white;
+        }
+
+        .empty {
+            padding: 40px;
+            text-align: center;
+            color: #737d94;
+            border: 1px dashed #293249;
+            border-radius: 13px;
+        }
+
+        @media (max-width: 700px) {
+
+            .opportunity-card {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .select-button {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+
+        <div class="brand">
+            ✦ SKILLSCOUT AI · HOD
+        </div>
+
+        <h1>Opportunities</h1>
+
+        <p class="subtitle">
+            Select an opportunity to view the students recommended by SkillScout AI.
+        </p>
+
+    </div>
+
+
+    <div class="section">
+
+        <h2>College Opportunities</h2>
+
+        <p class="section-text">
+            Review available opportunities and select one to analyze student matches.
+        </p>
+
+
+        <div class="opportunity-list">
+
+            {% for opportunity in opportunities %}
+
+            <div class="opportunity-card">
+
+                <div class="opportunity-info">
+
+                    <h3>
+                        {{ opportunity.title }}
+                    </h3>
+
+                    <p class="description">
+                        {{ opportunity.description }}
+                    </p>
+
+                    <div class="skills">
+                        Required Skills:
+                        {{ opportunity.required_skills }}
+                    </div>
+
+                </div>
+
+
+                <a
+                    href="{% url 'opportunity_matches' opportunity.id %}"
+                    class="select-button"
+                >
+                    Select Opportunity →
+                </a>
+
+            </div>
+
+            {% empty %}
+
+            <div class="empty">
+
+                <h3>No opportunities yet</h3>
+
+                <p>
+                    Opportunities created by staff will appear here.
+                </p>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+
+        <a
+            href="{% url 'hod_dashboard' %}"
+            class="back-button"
+        >
+            ← Back to HOD Dashboard
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

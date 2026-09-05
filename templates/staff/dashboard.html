@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Staff Dashboard | SkillScout AI</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #070b16;
+            color: white;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1150px;
+            margin: auto;
+            padding: 45px 0;
+        }
+
+        .header {
+            margin-bottom: 35px;
+        }
+
+        .badge {
+            color: #8879ff;
+            font-size: 10px;
+            letter-spacing: 1px;
+        }
+
+        h1 {
+            font-size: 38px;
+            margin: 10px 0;
+        }
+
+        .subtitle {
+            color: #737d94;
+            font-size: 13px;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: #10172a;
+            border: 1px solid #202941;
+            border-radius: 16px;
+            padding: 25px;
+        }
+
+        .stat-card span {
+            color: #737d94;
+            font-size: 11px;
+        }
+
+        .stat-card h2 {
+            margin-top: 10px;
+            font-size: 28px;
+            color: #8879ff;
+        }
+
+        .section {
+            background: #10172a;
+            border: 1px solid #202941;
+            border-radius: 18px;
+            padding: 28px;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .section-header h2 {
+            font-size: 20px;
+        }
+
+        .section-header p {
+            color: #737d94;
+            font-size: 11px;
+            margin-top: 5px;
+        }
+
+        .button {
+            text-decoration: none;
+            background: #6c5ce7;
+            color: white;
+            padding: 11px 16px;
+            border-radius: 9px;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        .opportunity {
+            padding: 20px;
+            margin-bottom: 14px;
+
+            background: #0b1120;
+            border: 1px solid #202941;
+            border-radius: 13px;
+        }
+
+        .opportunity-header {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .opportunity h3 {
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+
+        .type {
+            color: #8879ff;
+            font-size: 10px;
+        }
+
+        .date {
+            color: #737d94;
+            font-size: 11px;
+        }
+
+        .skills {
+            margin-top: 12px;
+            color: #aeb5c5;
+            font-size: 11px;
+        }
+
+        .match-button {
+            display: inline-block;
+            margin-top: 15px;
+            color: #72e6a1;
+            text-decoration: none;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        .empty {
+            text-align: center;
+            padding: 40px;
+            color: #737d94;
+        }
+
+        @media (max-width: 700px) {
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .section-header {
+                align-items: flex-start;
+                gap: 15px;
+                flex-direction: column;
+            }
+
+            .opportunity-header {
+                flex-direction: column;
+            }
+
+        }
+
+        .edit-button {
+    display: inline-block;
+    margin-top: 15px;
+    margin-left: 20px;
+    color: #aaa0ff;
+    text-decoration: none;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.edit-button:hover {
+    color: white;
+}
+
+.top-bar {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 25px;
+}
+
+.logout-button {
+    color: #aaa0ff;
+    border: 1px solid #202941;
+    background: #10172a;
+    padding: 9px 16px;
+    border-radius: 9px;
+    font-size: 11px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.logout-button:hover {
+    color: white;
+    background: #6c5ce7;
+    border-color: #6c5ce7;
+}
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="top-bar">
+        
+    <form method="post" action="{% url 'logout' %}">
+    {% csrf_token %}
+    <button type="submit" class="logout-button">
+        Logout
+    </button>
+</form>
+
+</div>
+
+    <div class="header">
+
+        <span class="badge">SKILLSCOUT AI • STAFF</span>
+
+        <h1>Welcome, {{ request.user.first_name|default:request.user.username }} 👋</h1>
+
+<p class="subtitle">
+    Staff Dashboard · Create opportunities and discover the students who best match them.
+</p>
+
+    </div>
+
+
+    <div class="stats">
+
+        <div class="stat-card">
+
+            <span>TOTAL OPPORTUNITIES</span>
+
+            <h2>
+                {{ opportunities|length }}
+            </h2>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <span>AI MATCHING</span>
+
+            <h2>ON</h2>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <span>STUDENT DISCOVERY</span>
+
+            <h2>AI</h2>
+
+        </div>
+
+    </div>
+
+
+    <section class="section">
+
+        <div class="section-header">
+
+            <div>
+
+                <h2>Opportunities</h2>
+
+                <p>
+                    Manage opportunities and analyze student matches.
+                </p>
+
+            </div>
+
+            <a
+                href="{% url 'opportunity_list' %}"
+                class="button"
+            >
+                + Create Opportunity
+            </a>
+
+        </div>
+
+
+        {% for opportunity in opportunities %}
+
+        <div class="opportunity">
+
+            <div class="opportunity-header">
+
+                <div>
+
+                    <h3>
+                        {{ opportunity.title }}
+                    </h3>
+
+                    <div class="type">
+                        {{ opportunity.get_opportunity_type_display }}
+                    </div>
+
+                </div>
+
+                <div class="date">
+                    {{ opportunity.event_date }}
+                </div>
+
+            </div>
+
+
+            <div class="skills">
+
+                Required Skills:
+                {{ opportunity.required_skills }}
+
+            </div>
+
+
+            <a
+                href="{% url 'opportunity_matches' opportunity.id %}"
+                class="match-button"
+            >
+                View AI Student Matches →
+            </a>
+
+
+            <a
+             href="{% url 'edit_opportunity' opportunity.id %}"
+            class="edit-button"
+            >
+                Edit Opportunity
+            </a>
+
+        </div>
+
+        {% empty %}
+
+        <div class="empty">
+
+            <h3>No opportunities yet</h3>
+
+            <p>
+                Create your first opportunity to start matching students.
+            </p>
+
+        </div>
+
+        {% endfor %}
+
+    </section>
+
+</div>
+
+</body>
+
+</html>

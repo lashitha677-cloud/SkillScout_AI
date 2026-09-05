@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Student Matches | SkillScout AI</title>
+
+    <style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        min-height: 100vh;
+        background: #070b16;
+        color: #ffffff;
+        font-family: Arial, sans-serif;
+    }
+
+    .container {
+        width: 90%;
+        max-width: 1050px;
+        margin: auto;
+        padding: 45px 0 70px;
+    }
+
+    /* ================= HEADER ================= */
+
+    .header {
+        margin-bottom: 28px;
+    }
+
+    .header span {
+        display: inline-block;
+        color: #8879ff;
+        font-size: 10px;
+        font-weight: bold;
+        letter-spacing: 1.5px;
+        margin-bottom: 8px;
+    }
+
+    .header h1 {
+        margin: 0 0 10px;
+        font-size: 34px;
+        letter-spacing: -1px;
+    }
+
+    .header p {
+        margin: 0;
+        color: #737d94;
+        font-size: 13px;
+    }
+
+    /* ================= OPPORTUNITY ================= */
+
+    .requirement-box {
+        padding: 24px;
+        margin-bottom: 25px;
+        background: #10172a;
+        border: 1px solid #202941;
+        border-radius: 16px;
+    }
+
+    .requirement-box strong {
+        color: #8879ff;
+        font-size: 10px;
+        letter-spacing: 1px;
+    }
+
+    .requirement-box h2 {
+        margin: 8px 0 18px;
+        font-size: 21px;
+    }
+
+    .skills {
+        display: inline-block;
+        margin-right: 10px;
+        margin-bottom: 8px;
+        padding: 8px 12px;
+        background: #0b1120;
+        border: 1px solid #202941;
+        border-radius: 8px;
+        color: #aeb5c5;
+        font-size: 11px;
+    }
+
+    /* ================= STUDENT LIST ================= */
+
+    .student-list {
+        display: grid;
+        gap: 16px;
+    }
+
+    .student-card {
+        padding: 24px;
+        background: #10172a;
+        border: 1px solid #202941;
+        border-radius: 16px;
+        transition: 0.2s ease;
+    }
+
+    .student-card:hover {
+        border-color: #6c5ce7;
+        transform: translateY(-2px);
+    }
+
+    /* ================= STUDENT HEADER ================= */
+
+    .student-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 15px;
+    }
+
+    .student-name {
+        flex: 1;
+        font-size: 17px;
+        font-weight: bold;
+    }
+
+    .match {
+        font-size: 21px;
+        font-weight: bold;
+    }
+
+    .eligible {
+        color: #72e6a1;
+    }
+
+    .not-eligible {
+        color: #ff8585;
+    }
+
+    .status {
+        padding: 7px 10px;
+        border-radius: 8px;
+        font-size: 10px;
+        font-weight: bold;
+    }
+
+    .status.eligible {
+        background: rgba(114, 230, 161, 0.08);
+        border: 1px solid rgba(114, 230, 161, 0.2);
+        color: #72e6a1;
+    }
+
+    .status.not-eligible {
+        background: rgba(255, 133, 133, 0.08);
+        border: 1px solid rgba(255, 133, 133, 0.2);
+        color: #ff8585;
+    }
+
+    /* ================= MATCH BAR ================= */
+
+    .bar {
+        width: 100%;
+        height: 8px;
+        margin: 18px 0;
+        background: #20283b;
+        border-radius: 20px;
+        overflow: hidden;
+    }
+
+    .bar-fill {
+        height: 100%;
+        background: #6c5ce7;
+        border-radius: 20px;
+        transition: width 0.5s ease;
+    }
+
+    /* ================= SKILL TAGS ================= */
+
+    .details {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .tag {
+        padding: 7px 11px;
+        border-radius: 8px;
+        font-size: 10px;
+        font-weight: 600;
+    }
+
+    .matched {
+        background: rgba(114, 230, 161, 0.08);
+        border: 1px solid rgba(114, 230, 161, 0.18);
+        color: #72e6a1;
+    }
+
+    .missing {
+        background: rgba(255, 133, 133, 0.08);
+        border: 1px solid rgba(255, 133, 133, 0.18);
+        color: #ff8585;
+    }
+
+    /* ================= EMPTY ================= */
+
+    .empty {
+        padding: 45px 25px;
+        text-align: center;
+        background: #10172a;
+        border: 1px dashed #293249;
+        border-radius: 16px;
+    }
+
+    .empty h3 {
+        margin: 0 0 8px;
+        font-size: 16px;
+    }
+
+    .empty p {
+        margin: 0;
+        color: #737d94;
+        font-size: 12px;
+    }
+
+    /* ================= BACK ================= */
+
+    .back {
+        display: inline-flex;
+        margin-top: 25px;
+        padding: 10px 14px;
+        border: 1px solid #202941;
+        border-radius: 9px;
+        background: #10172a;
+        color: #aeb5c5;
+        text-decoration: none;
+        font-size: 11px;
+        transition: 0.2s ease;
+    }
+
+    .back:hover {
+        border-color: #6c5ce7;
+        color: #ffffff;
+    }
+
+    /* ================= MOBILE ================= */
+
+    @media (max-width: 650px) {
+
+        .container {
+            width: 92%;
+            padding-top: 30px;
+        }
+
+        .header h1 {
+            font-size: 28px;
+        }
+
+        .student-header {
+            align-items: flex-start;
+            flex-wrap: wrap;
+        }
+
+        .student-name {
+            width: 100%;
+            flex: none;
+        }
+
+        .match {
+            font-size: 18px;
+        }
+
+    }
+
+    .recommendation {
+    margin-top: 6px;
+    color: #aeb5c5;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+/* ================= AI SUMMARY ================= */
+
+.ai-summary {
+    padding: 22px;
+    margin-bottom: 25px;
+    background: #10172a;
+    border: 1px solid #202941;
+    border-radius: 16px;
+}
+
+.ai-summary-title {
+    color: #8879ff;
+    font-size: 10px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+}
+
+.ai-summary-text {
+    color: #737d94;
+    font-size: 12px;
+    margin-bottom: 18px;
+}
+
+.summary-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+.summary-item {
+    padding: 15px;
+    background: #0b1120;
+    border: 1px solid #202941;
+    border-radius: 10px;
+}
+
+.summary-item span {
+    display: block;
+    color: #737d94;
+    font-size: 9px;
+    margin-bottom: 7px;
+}
+
+.summary-item strong {
+    font-size: 18px;
+    color: #ffffff;
+}
+
+@media (max-width: 650px) {
+    .summary-grid {
+        grid-template-columns: 1fr;
+    }
+}
+.ai-recommendation {
+    margin-top: 18px;
+    padding: 14px 16px;
+    background: rgba(108, 92, 231, 0.06);
+    border: 1px solid rgba(108, 92, 231, 0.18);
+    border-radius: 10px;
+}
+
+.ai-label {
+    display: block;
+    margin-bottom: 7px;
+    color: #8879ff;
+    font-size: 9px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.ai-recommendation p {
+    margin: 0;
+    color: #aeb5c5;
+    font-size: 11px;
+    line-height: 1.5;
+}
+</style>
+    
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+
+        <span>SKILLSCOUT AI</span>
+
+        <h1>Student Matches</h1>
+
+        <p>
+            Students ranked according to their
+            eligibility for this opportunity.
+        </p>
+
+    </div>
+
+
+    <div class="requirement-box">
+
+        <strong>
+            OPPORTUNITY
+        </strong>
+
+        <h2>
+            {{ opportunity.title }}
+        </h2>
+
+        <div class="skills">
+
+            Required skills:
+            {{ opportunity.required_skills }}
+
+        </div>
+
+        <div class="skills">
+
+            Minimum level:
+            {{ opportunity.get_minimum_skill_level_display }}
+
+        </div>
+
+    </div>
+
+    <div class="ai-summary">
+
+    <div class="ai-summary-title">
+        🤖 AI MATCHING RESULTS
+    </div>
+
+    <div class="ai-summary-text">
+        AI analyzed {{ results|length }} students for this opportunity.
+    </div>
+
+    <div class="summary-grid">
+
+        <div class="summary-item">
+            <span>TOTAL STUDENTS</span>
+            <strong>{{ results|length }}</strong>
+        </div>
+
+        <div class="summary-item">
+            <span>ELIGIBLE</span>
+            <strong>{{ eligible_count }}</strong>
+        </div>
+
+        <div class="summary-item">
+            <span>TOP MATCH</span>
+
+            <strong>
+                {% if results %}
+                    {{ results.0.result.match_percentage }}%
+                {% else %}
+                    —
+                {% endif %}
+            </strong>
+        </div>
+
+    </div>
+
+</div>
+
+    <div class="student-list">
+
+        {% for item in results %}
+
+        <div class="student-card">
+
+            <div class="student-header">
+
+                <div class="student-name">
+
+                    {{ item.profile.user.username }}
+
+                </div>
+
+                <div class="match
+                    {% if item.result.eligible %}
+                        eligible
+                    {% else %}
+                        not-eligible
+                    {% endif %}
+                ">
+
+                    {{ item.result.match_percentage }}%
+
+                </div>
+
+                <div class="recommendation">
+
+    {% if item.result.match_percentage >= 90 %}
+        🏆 Highly Recommended
+
+    {% elif item.result.match_percentage >= 75 %}
+        ⭐ Recommended
+
+    {% elif item.result.match_percentage >= 60 %}
+        ⚠️ Consider
+
+    {% else %}
+        ❌ Low Match
+    {% endif %}
+
+</div>
+                
+                {% if item.result.eligible %}
+                <div class="status eligible">
+                    ✅ Eligible
+                </div>
+                
+                {% else %}
+                
+                <div class="status not-eligible">
+                    ❌ Not Eligible
+                </div>
+                
+                {% endif %}
+
+            </div>
+
+
+            <div class="bar">
+
+                <div
+                    class="bar-fill"
+                    style="width:
+                    {{ item.result.match_percentage }}%;">
+                </div>
+
+            </div>
+
+
+            <div class="details">
+
+                {% if item.result.matched_skills %}
+
+                    {% for skill in item.result.matched_skills %}
+
+                        <span class="tag matched">
+                            ✓ {{ skill }}
+                        </span>
+
+                    {% endfor %}
+
+                {% endif %}
+
+
+                {% if item.result.missing_skills %}
+
+                    {% for skill in item.result.missing_skills %}
+
+                        <span class="tag missing">
+                            ✕ {{ skill }}
+                        </span>
+
+                    {% endfor %}
+
+                {% endif %}
+
+            </div>
+
+            <div class="ai-recommendation">
+
+    <span class="ai-label">
+        ✦ AI MATCH ANALYSIS
+    </span>
+
+    <p>
+        {{ item.result.recommendation }}
+    </p>
+
+</div>
+
+        </div>
+
+        {% empty %}
+
+        <div class="empty">
+
+            <h3>No students found</h3>
+
+            <p>
+                Add student profiles and skills first.
+            </p>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+
+    {% if user_role == "HOD" %}
+
+<a
+    href="{% url 'hod_opportunities' %}"
+    class="back"
+>
+    ← Back to HOD Opportunities
+</a>
+
+{% else %}
+
+<a
+    href="{% url 'staff_dashboard' %}"
+    class="back"
+>
+    ← Back to Staff Dashboard
+</a>
+
+{% endif %}
+
+</div>
+
+</body>
+
+</html>

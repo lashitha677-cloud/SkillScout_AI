@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Edit Certification | SkillScout AI</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-family: Arial, sans-serif;
+
+            background: #070b16;
+            color: white;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 520px;
+
+            padding: 32px;
+
+            background: #10172a;
+
+            border: 1px solid #202941;
+
+            border-radius: 18px;
+        }
+
+        .brand {
+            color: #8879ff;
+
+            font-size: 10px;
+
+            letter-spacing: 1px;
+
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            margin: 0 0 8px;
+
+            font-size: 28px;
+        }
+
+        .description {
+            margin-bottom: 25px;
+
+            color: #737d94;
+
+            font-size: 12px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+
+            margin-bottom: 7px;
+
+            color: #aeb5c5;
+
+            font-size: 11px;
+
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+
+            padding: 12px;
+
+            border: 1px solid #293249;
+
+            border-radius: 9px;
+
+            outline: none;
+
+            background: #0b1120;
+
+            color: white;
+
+            font-size: 12px;
+        }
+
+        input:focus {
+            border-color: #6c5ce7;
+        }
+
+        .buttons {
+            display: flex;
+
+            gap: 10px;
+
+            margin-top: 25px;
+        }
+
+        .save-button {
+            flex: 1;
+
+            padding: 12px;
+
+            border: none;
+
+            border-radius: 9px;
+
+            background: #6c5ce7;
+
+            color: white;
+
+            font-size: 11px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+        .save-button:hover {
+            background: #7969ee;
+        }
+
+        .cancel-button {
+            flex: 1;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            padding: 12px;
+
+            border: 1px solid #293249;
+
+            border-radius: 9px;
+
+            background: #191c35;
+
+            color: #aaa0ff;
+
+            text-decoration: none;
+
+            font-size: 11px;
+
+            font-weight: bold;
+        }
+
+        .cancel-button:hover {
+            background: #222642;
+        }
+
+        .delete-button {
+    display: block;
+
+    width: 100%;
+
+    margin-top: 12px;
+
+    padding: 12px;
+
+    text-align: center;
+
+    border-radius: 9px;
+
+    background: #d94b5b;
+
+    color: white;
+
+    text-decoration: none;
+
+    font-size: 11px;
+
+    font-weight: bold;
+
+    transition: 0.2s;
+}
+
+.delete-button:hover {
+    background: #e15b69;
+}
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="brand">
+        SKILLSCOUT AI
+    </div>
+
+    <h1>
+        Edit Certification
+    </h1>
+
+    <p class="description">
+        Update your certification details.
+    </p>
+
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+        <div class="form-group">
+
+            <label>
+                Certificate Name
+            </label>
+
+            {{ form.certificate_name }}
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Issuing Organization
+            </label>
+
+            {{ form.issuing_organization }}
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Issue Year
+            </label>
+
+            {{ form.issue_year }}
+
+        </div>
+
+
+        <div class="buttons">
+
+            <a
+                href="{% url 'student_certifications' %}"
+                class="cancel-button">
+
+                Cancel
+
+            </a>
+
+            <button
+                type="submit"
+                class="save-button">
+
+                Save Changes
+
+            </button>
+
+            <a
+    href="{% url 'delete_certification' certification.id %}"
+    class="delete-button">
+
+    🗑 Delete Certification
+
+</a>
+
+        </div>
+
+    </form>
+
+</div>
+
+</body>
+
+</html>

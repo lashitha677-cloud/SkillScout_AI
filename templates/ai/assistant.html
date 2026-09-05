@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Ask Scout | SkillScout AI</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            background: #070b16;
+            color: white;
+        }
+
+        .page {
+            width: 90%;
+            max-width: 950px;
+            margin: auto;
+            padding: 45px 0;
+        }
+
+        /* HEADER */
+
+        .top {
+            margin-bottom: 30px;
+        }
+
+        .brand {
+            color: #8879ff;
+            font-size: 10px;
+            font-weight: bold;
+            letter-spacing: 1.5px;
+            margin-bottom: 12px;
+        }
+
+        .top h1 {
+            font-size: 34px;
+            margin-bottom: 8px;
+        }
+
+        .top p {
+            color: #737d94;
+            font-size: 13px;
+        }
+
+        /* AI CARD */
+
+        .ai-card {
+            background: #10172a;
+            border: 1px solid #202941;
+            border-radius: 18px;
+            overflow: hidden;
+        }
+
+        .ai-header {
+            padding: 22px 25px;
+            border-bottom: 1px solid #202941;
+
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .ai-icon {
+            width: 45px;
+            height: 45px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 12px;
+            background: #6c5ce7;
+
+            font-size: 20px;
+        }
+
+        .ai-header h2 {
+            font-size: 17px;
+            margin-bottom: 4px;
+        }
+
+        .ai-header span {
+            color: #72e6a1;
+            font-size: 10px;
+        }
+
+        /* CHAT AREA */
+
+        .chat-area {
+            min-height: 300px;
+            padding: 25px;
+        }
+
+        .welcome-message {
+            padding: 20px;
+            background: #0b1120;
+            border: 1px solid #202941;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        .welcome-message strong {
+            display: block;
+            color: #aaa0ff;
+            font-size: 12px;
+            margin-bottom: 8px;
+        }
+
+        .welcome-message p {
+            color: #aeb5c5;
+            font-size: 12px;
+            line-height: 1.7;
+        }
+
+        .response {
+    max-width: 75%;
+    padding: 14px 17px;
+    margin-bottom: 14px;
+    border-radius: 16px;
+}
+
+.user-message {
+    margin-left: auto;
+    background: #6c5ce7;
+    border-bottom-right-radius: 4px;
+}
+
+.user-message .response-label {
+    color: #ddd8ff;
+}
+
+.ai-message {
+    margin-right: auto;
+    background: #0b1120;
+    border: 1px solid #29224e;
+    border-bottom-left-radius: 4px;
+}
+
+.ai-message .response-label {
+    color: #8879ff;
+}
+
+        .response-label {
+            color: #8879ff;
+            font-size: 10px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .response-text {
+            color: #d9dce6;
+            font-size: 13px;
+            line-height: 1.7;
+            white-space: pre-wrap;
+        }
+
+        /* FORM */
+
+        .question-area {
+            padding: 20px 25px 25px;
+            border-top: 1px solid #202941;
+        }
+
+        .question-area label {
+            display: block;
+            color: #aeb5c5;
+            font-size: 11px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .input-row {
+            display: flex;
+            gap: 10px;
+        }
+
+        textarea {
+            flex: 1;
+            min-height: 48px;
+            max-height: 120px;
+
+            resize: vertical;
+
+            padding: 14px;
+
+            background: #0b1120;
+            border: 1px solid #293249;
+            border-radius: 10px;
+
+            color: white;
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+
+            outline: none;
+        }
+
+        textarea:focus {
+            border-color: #6c5ce7;
+            box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.12);
+        }
+
+        textarea::placeholder {
+            color: #566075;
+        }
+
+        .ask-button {
+            align-self: stretch;
+
+            border: none;
+            border-radius: 10px;
+
+            padding: 0 20px;
+
+            background: #6c5ce7;
+            color: white;
+
+            font-size: 12px;
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+        .ask-button:hover {
+            background: #7969ee;
+        }
+
+        /* SUGGESTIONS */
+
+        .suggestions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .suggestion {
+            padding: 7px 11px;
+
+            border-radius: 20px;
+
+            background: #191c35;
+            border: 1px solid #293249;
+
+            color: #8f98ad;
+            font-size: 10px;
+        }
+
+        /* BACK */
+
+        .back {
+            display: inline-block;
+            margin-top: 22px;
+
+            color: #8879ff;
+            text-decoration: none;
+            font-size: 11px;
+        }
+
+        @media (max-width: 600px) {
+
+            .page {
+                width: 92%;
+                padding: 30px 0;
+            }
+
+            .top h1 {
+                font-size: 28px;
+            }
+
+            .input-row {
+                flex-direction: column;
+            }
+
+            .ask-button {
+                padding: 13px;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+<div class="page">
+
+    <div class="top">
+
+        <div class="brand">
+            ✦ SKILLSCOUT AI
+        </div>
+
+        <h1>Ask Scout</h1>
+
+        <p>
+            Your AI-powered student talent assistant.
+        </p>
+
+    </div>
+
+
+    <div class="ai-card">
+
+        <!-- AI HEADER -->
+
+        <div class="ai-header">
+
+            <div class="ai-icon">
+                ✦
+            </div>
+
+            <div>
+
+                <h2>Scout AI Assistant</h2>
+
+                <span>
+                    ● Qwen AI · Online
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- CHAT -->
+
+<div class="chat-area" id="chat-area">
+
+    <div class="welcome-message">
+
+        <strong>
+            👋 Hello! I'm Scout.
+        </strong>
+
+        <p>
+            I can help you understand skills,
+            opportunities, student matching and
+            career-related questions.
+        </p>
+
+    </div>
+
+
+    {% for chat in chat_history %}
+
+        <div class="response user-message">
+
+            <div class="response-label">
+                YOU
+            </div>
+
+            <div class="response-text">
+                {{ chat.question }}
+            </div>
+
+        </div>
+
+
+        <div class="response ai-message">
+
+            <div class="response-label">
+                SCOUT AI
+            </div>
+
+            <div class="response-text">
+                {{ chat.response }}
+            </div>
+
+        </div>
+
+    {% endfor %}
+
+</div>
+
+
+        <!-- QUESTION -->
+
+        <div class="question-area">
+
+            
+            <form id="chat-form">
+
+    {% csrf_token %}
+
+    <label>
+        Ask Scout anything
+    </label>
+
+    <div class="input-row">
+
+        <textarea
+            id="question"
+            name="question"
+            placeholder="Example: How can I improve my technical skills?"
+            required
+        ></textarea>
+
+        <button
+            type="submit"
+            class="ask-button"
+            id="ask-button"
+        >
+            Ask Scout →
+        </button>
+
+    </div>
+
+</form>
+
+
+            <div class="suggestions">
+
+                <span class="suggestion">
+                    What skills should I learn?
+                </span>
+
+                <span class="suggestion">
+                    How can I improve my profile?
+                </span>
+
+                <span class="suggestion">
+                    Which skills are important for AI?
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <a
+        href="{% url 'student_dashboard' %}"
+        class="back"
+    >
+        ← Back to SkillScout
+    </a>
+
+</div>
+
+<script>
+
+const form = document.getElementById("chat-form");
+const textarea = document.getElementById("question");
+const button = document.getElementById("ask-button");
+const chatArea = document.getElementById("chat-area");
+
+form.addEventListener("submit", async function(event) {
+
+    event.preventDefault();
+
+    const question = textarea.value.trim();
+
+    if (!question) {
+        return;
+    }
+
+    // Show user's question immediately
+    const userMessage = document.createElement("div");
+
+    userMessage.className = "response user-message";
+
+    userMessage.innerHTML = `
+        <div class="response-label">
+            YOU
+        </div>
+
+        <div class="response-text">
+            ${escapeHtml(question)}
+        </div>
+    `;
+
+    chatArea.appendChild(userMessage);
+
+
+    // Show thinking message
+    const aiMessage = document.createElement("div");
+
+    aiMessage.className = "response ai-message";
+
+    aiMessage.innerHTML = `
+        <div class="response-label">
+            SCOUT AI
+        </div>
+
+        <div class="response-text">
+            Scout is thinking... 🤖
+        </div>
+    `;
+
+    chatArea.appendChild(aiMessage);
+
+
+    // Clear input immediately
+    textarea.value = "";
+
+    textarea.focus();
+
+    button.disabled = true;
+    button.innerText = "Thinking...";
+
+
+    try {
+
+        const csrfToken = document.querySelector(
+            "[name=csrfmiddlewaretoken]"
+        ).value;
+
+
+        const formData = new FormData();
+
+        formData.append("question", question);
+
+
+        const response = await fetch(
+            "{% url 'ai_assistant' %}",
+            {
+                method: "POST",
+
+                headers: {
+                    "X-CSRFToken": csrfToken
+                },
+
+                body: formData
+            }
+        );
+
+
+        const data = await response.json();
+
+
+        if (data.response) {
+
+            aiMessage.querySelector(
+                ".response-text"
+            ).innerText = data.response;
+
+        } else {
+
+            aiMessage.querySelector(
+                ".response-text"
+            ).innerText =
+                data.error || "Scout could not respond.";
+
+        }
+
+    }
+
+    catch (error) {
+
+        aiMessage.querySelector(
+            ".response-text"
+        ).innerText =
+            "Unable to connect to Scout AI.";
+
+        console.error(error);
+
+    }
+
+
+    button.disabled = false;
+    button.innerText = "Ask Scout →";
+
+    textarea.focus();
+
+});
+
+
+function escapeHtml(text) {
+
+    const div = document.createElement("div");
+
+    div.textContent = text;
+
+    return div.innerHTML;
+
+}
+
+</script>
+
+</body>
+
+</html>

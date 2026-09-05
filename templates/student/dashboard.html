@@ -1,0 +1,546 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Student Dashboard | SkillScout AI</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #070b16;
+            color: white;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: auto;
+            padding: 40px 0 70px;
+        }
+
+        /* HEADER */
+
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            padding: 20px 5%;
+
+            background: #0b1020;
+            border-bottom: 1px solid #202941;
+        }
+
+        .brand {
+            font-size: 21px;
+            font-weight: bold;
+        }
+
+        .brand span {
+            color: #8879ff;
+        }
+
+        .user {
+            color: #aeb5c5;
+            font-size: 12px;
+        }
+
+        /* WELCOME */
+
+        .welcome {
+            margin-bottom: 35px;
+        }
+
+        .welcome span {
+            color: #8879ff;
+            font-size: 10px;
+            letter-spacing: 1px;
+        }
+
+        .welcome h1 {
+            margin: 10px 0;
+            font-size: 38px;
+        }
+
+        .welcome p {
+            color: #737d94;
+            font-size: 13px;
+        }
+
+        /* STATS */
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            padding: 24px;
+
+            background: #10172a;
+            border: 1px solid #202941;
+            border-radius: 15px;
+        }
+
+        .stat-card h2 {
+            color: #8879ff;
+            font-size: 30px;
+            margin-bottom: 7px;
+        }
+
+        .stat-card p {
+            color: #737d94;
+            font-size: 11px;
+        }
+
+        /* QUICK ACTIONS */
+
+        .section {
+            background: #10172a;
+            border: 1px solid #202941;
+            border-radius: 18px;
+            padding: 28px;
+            margin-bottom: 25px;
+        }
+
+        .section h2 {
+            font-size: 19px;
+            margin-bottom: 8px;
+        }
+
+        .section > p {
+            color: #737d94;
+            font-size: 11px;
+            margin-bottom: 22px;
+        }
+
+        .actions {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        .action {
+            padding: 20px;
+
+            background: #0b1120;
+            border: 1px solid #202941;
+            border-radius: 12px;
+
+            text-decoration: none;
+            color: white;
+
+            transition: 0.2s;
+        }
+
+        .action:hover {
+            border-color: #6c5ce7;
+            transform: translateY(-3px);
+        }
+
+        .action-icon {
+            font-size: 22px;
+            margin-bottom: 12px;
+        }
+
+        .action h3 {
+            font-size: 14px;
+            margin-bottom: 6px;
+        }
+
+        .action p {
+            color: #737d94;
+            font-size: 10px;
+            line-height: 1.5;
+        }
+
+        /* AI */
+
+        .ai-card {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+
+            padding: 25px;
+
+            background: linear-gradient(
+                110deg,
+                #151332,
+                #10172a
+            );
+
+            border: 1px solid #29224e;
+            border-radius: 18px;
+        }
+
+        .ai-icon {
+            width: 50px;
+            height: 50px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: #6c5ce7;
+            border-radius: 14px;
+
+            font-size: 20px;
+        }
+
+        .ai-card span {
+            color: #8879ff;
+            font-size: 9px;
+            letter-spacing: 1px;
+        }
+
+        .ai-card h2 {
+            margin: 5px 0;
+            font-size: 17px;
+        }
+
+        .ai-card p {
+            color: #737d94;
+            font-size: 11px;
+            line-height: 1.6;
+        }
+
+        .ai-button {
+            display: inline-block;
+            margin-top: 14px;
+
+            padding: 9px 14px;
+
+            background: #6c5ce7;
+            border-radius: 8px;
+
+            color: white;
+            text-decoration: none;
+
+            font-size: 10px;
+            font-weight: bold;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 800px) {
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .actions {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+        @media (max-width: 500px) {
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .welcome h1 {
+                font-size: 30px;
+            }
+
+            .container {
+                width: 92%;
+            }
+
+        }
+
+        .user-area {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logout-button {
+    padding: 8px 14px;
+    background: #191c35;
+    border: 1px solid #293249;
+    border-radius: 8px;
+    color: #aaa0ff;
+    text-decoration: none;
+    font-size: 11px;
+    font-weight: bold;
+    border: 1px solid #293249;
+    font-family: Arial, sans-serif;
+}
+
+.logout-button:hover {
+    background: #6c5ce7;
+    color: white;
+}
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<header class="topbar">
+
+    <div class="brand">
+        ✦ SkillScout <span>AI</span>
+    </div>
+
+    <div class="user-area">
+
+    <div class="user">
+        👤 {{ request.user.username }}
+    </div>
+
+    <form method="POST" action="{% url 'logout' %}" style="display: inline;">
+    {% csrf_token %}
+
+    <button type="submit" class="logout-button">
+        Logout
+    </button>
+
+</form>
+
+</div>
+
+</header>
+
+
+<main class="container">
+
+
+    <!-- WELCOME -->
+
+    <section class="welcome">
+
+        <span>STUDENT DASHBOARD</span>
+
+        <h1>
+            Welcome, {{ request.user.username }} 👋
+        </h1>
+
+        <p>
+            Manage your skills, projects and certifications
+            and discover opportunities matched to you.
+        </p>
+
+    </section>
+
+
+    <!-- STATISTICS -->
+
+    <section class="stats">
+
+        <div class="stat-card">
+
+            <h2>
+                {{ skills_count }}
+            </h2>
+
+            <p>
+                Technical Skills
+            </p>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <h2>
+                {{ projects_count }}
+            </h2>
+
+            <p>
+                Projects
+            </p>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <h2>
+                {{ certifications_count }}
+            </h2>
+
+            <p>
+                Certifications
+            </p>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <h2>
+                {{ opportunities_count }}
+            </h2>
+
+            <p>
+                Available Opportunities
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- QUICK ACTIONS -->
+
+    <section class="section">
+
+        <h2>
+            Quick Actions
+        </h2>
+
+        <p>
+            Manage your SkillScout profile.
+        </p>
+
+
+        <div class="actions">
+
+
+            <a
+                href="{% url 'skill_passport' %}"
+                class="action">
+
+                <div class="action-icon">
+                    🧠
+                </div>
+
+                <h3>
+                    My Skill Passport
+                </h3>
+
+                <p>
+                    Manage your skills and profile information.
+                </p>
+
+            </a>
+
+
+            <a
+                href="{% url 'student_projects' %}"
+                class="action">
+
+                <div class="action-icon">
+                    🚀
+                </div>
+
+                <h3>
+                    My Projects
+                </h3>
+
+                <p>
+                    Add and manage your projects.
+                </p>
+
+            </a>
+
+
+            <a
+                href="{% url 'student_certifications' %}"
+                class="action">
+
+                <div class="action-icon">
+                    🏆
+                </div>
+
+                <h3>
+                    My Certifications
+                </h3>
+
+                <p>
+                    Add and manage your certificates.
+                </p>
+
+            </a>
+
+            <a
+    href="{% url 'student_notifications' %}"
+    class="action">
+
+    <div class="action-icon">
+        🔔
+    </div>
+
+    <h3>
+        Notifications
+    </h3>
+
+    <p>
+        View your opportunity matches and latest updates.
+    </p>
+
+</a>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- AI -->
+
+    <section class="ai-card">
+
+        <div class="ai-icon">
+            ✦
+        </div>
+
+
+        <div>
+
+            <span>
+                SKILLSCOUT AI
+            </span>
+
+            <h2>
+                Discover opportunities made for you.
+            </h2>
+
+            <p>
+                SkillScout AI will analyze your skills,
+                projects and certifications to find
+                opportunities that match your profile.
+            </p>
+
+
+            <a
+                href="{% url 'ai_assistant' %}"
+                class="ai-button">
+
+                🤖 Ask Scout
+
+            </a>
+
+        </div>
+
+    </section>
+
+
+</main>
+
+
+</body>
+
+</html>

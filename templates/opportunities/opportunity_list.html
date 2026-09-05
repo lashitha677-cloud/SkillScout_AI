@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Opportunities | SkillScout AI</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+
+            background: #070b16;
+            color: white;
+
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+
+            margin: auto;
+            padding: 45px 0;
+        }
+
+        .header {
+            margin-bottom: 30px;
+        }
+
+        .header span {
+            color: #8879ff;
+            font-size: 10px;
+            letter-spacing: 1px;
+        }
+
+        .header h1 {
+            margin: 8px 0;
+            font-size: 34px;
+        }
+
+        .header p {
+            color: #737d94;
+            font-size: 13px;
+        }
+
+        .form-box {
+            padding: 28px;
+            margin-bottom: 30px;
+
+            background: #10172a;
+
+            border: 1px solid #202941;
+            border-radius: 18px;
+        }
+
+        .form-box h2 {
+            margin-top: 0;
+            font-size: 18px;
+        }
+
+        label {
+            display: block;
+
+            margin-bottom: 7px;
+
+            color: #aeb5c5;
+
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        input,
+        textarea,
+        select {
+            width: 100%;
+
+            padding: 12px;
+
+            margin-bottom: 18px;
+
+            border: 1px solid #293249;
+            border-radius: 9px;
+
+            outline: none;
+
+            background: #0b1120;
+            color: white;
+
+            font-size: 12px;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            border-color: #6c5ce7;
+        }
+
+        button {
+            padding: 12px 20px;
+
+            border: none;
+            border-radius: 9px;
+
+            background: #6c5ce7;
+            color: white;
+
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #7969ee;
+        }
+
+        .opportunities {
+            display: grid;
+
+            grid-template-columns: repeat(2, 1fr);
+
+            gap: 18px;
+        }
+
+        .card {
+            padding: 22px;
+
+            background: #10172a;
+
+            border: 1px solid #202941;
+            border-radius: 15px;
+        }
+
+        .card h3 {
+            margin-top: 0;
+            font-size: 18px;
+        }
+
+        .description {
+            color: #7d879c;
+
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        .skills {
+            margin-top: 15px;
+
+            color: #8879ff;
+
+            font-size: 11px;
+        }
+
+        .meta {
+            margin-top: 12px;
+
+            color: #737d94;
+
+            font-size: 10px;
+        }
+
+        .badge {
+            display: inline-block;
+
+            margin-top: 12px;
+
+            padding: 5px 9px;
+
+            border-radius: 20px;
+
+            background: #191c35;
+
+            color: #a59cff;
+
+            font-size: 9px;
+        }
+
+        .empty {
+            grid-column: 1 / -1;
+
+            padding: 40px;
+
+            text-align: center;
+
+            border: 1px dashed #293249;
+
+            border-radius: 15px;
+
+            color: #737d94;
+        }
+
+        @media (max-width: 700px) {
+
+            .opportunities {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+        .success-message {
+    padding: 14px 18px;
+
+    margin-bottom: 20px;
+
+    background: #10251b;
+
+    border: 1px solid #245c3a;
+
+    border-radius: 10px;
+
+    color: #72e6a1;
+
+    font-size: 13px;
+
+    font-weight: bold;
+}
+
+.matches-btn {
+    display: inline-block;
+
+    margin-top: 18px;
+
+    padding: 10px 14px;
+
+    border-radius: 9px;
+
+    background: #6c5ce7;
+
+    color: white;
+
+    text-decoration: none;
+
+    font-size: 11px;
+
+    font-weight: bold;
+}
+
+.matches-btn:hover {
+    background: #7969ee;
+}
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+
+        <span>SKILLSCOUT AI</span>
+
+        <h1>Opportunities</h1>
+
+        <p>
+            Create events and opportunities for students.
+        </p>
+
+    </div>
+
+    {% if messages %}
+
+    {% for message in messages %}
+
+        <div class="success-message">
+            ✅ {{ message }}
+        </div>
+
+    {% endfor %}
+
+{% endif %}
+
+
+    <!-- CREATE OPPORTUNITY -->
+
+    <div class="form-box">
+
+        <h2>➕ Create New Opportunity</h2>
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            {{ form.as_p }}
+
+            <button type="submit">
+                Create Opportunity
+            </button>
+
+        </form>
+
+    </div>
+
+
+    <!-- OPPORTUNITY LIST -->
+
+    <div class="opportunities">
+
+        {% for opportunity in opportunities %}
+
+        <div class="card">
+
+            <h3>
+                {{ opportunity.title }}
+            </h3>
+
+            <p class="description">
+                {{ opportunity.description }}
+            </p>
+
+            <div class="skills">
+                Required skills:
+                {{ opportunity.required_skills }}
+            </div>
+
+            <div class="meta">
+
+                Minimum level:
+                {{ opportunity.get_minimum_skill_level_display }}
+
+                {% if opportunity.event_date %}
+                    <br>
+                    Event date:
+                    {{ opportunity.event_date }}
+                {% endif %}
+
+            </div>
+
+            <span class="badge">
+                {{ opportunity.get_opportunity_type_display }}
+            </span>
+
+            <a 
+            href="{% url 'opportunity_matches' opportunity.id %}"
+            class="matches-btn"
+            >
+            🤖 View Student matches
+            </a>
+
+        </div>
+
+        {% empty %}
+
+        <div class="empty">
+
+            <h3>No opportunities yet</h3>
+
+            <p>
+                Create the first opportunity above.
+            </p>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

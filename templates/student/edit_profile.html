@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Edit Profile | SkillScout AI</title>
+
+    <style>
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: #070b16;
+            color: white;
+
+            font-family: Arial, sans-serif;
+        }
+
+        .profile-box {
+            width: 90%;
+            max-width: 500px;
+
+            padding: 35px;
+
+            background: #10172a;
+
+            border: 1px solid #202941;
+
+            border-radius: 18px;
+        }
+
+        h1 {
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #737d94;
+            font-size: 13px;
+            margin-bottom: 28px;
+        }
+
+        label {
+            display: block;
+
+            margin-bottom: 7px;
+
+            color: #aeb5c5;
+
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+
+            padding: 12px;
+
+            margin-bottom: 20px;
+
+            box-sizing: border-box;
+
+            border: 1px solid #293249;
+
+            border-radius: 9px;
+
+            background: #0b1120;
+
+            color: white;
+
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #6c5ce7;
+        }
+
+        button {
+            width: 100%;
+
+            padding: 13px;
+
+            border: none;
+
+            border-radius: 9px;
+
+            background: #6c5ce7;
+
+            color: white;
+
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #7969ee;
+        }
+
+        .back {
+            display: block;
+
+            margin-top: 15px;
+
+            text-align: center;
+
+            color: #8879ff;
+
+            text-decoration: none;
+
+            font-size: 12px;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <div class="profile-box">
+
+        <h1>Edit Your Profile</h1>
+
+        <p class="subtitle">
+            Keep your information updated for better student matching.
+        </p>
+
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            {{ form.as_p }}
+
+            <button type="submit">
+                Save Profile
+            </button>
+
+        </form>
+
+
+        <a
+            href="{% url 'skill_passport' %}"
+            class="back"
+        >
+            ← Back to Skill Passport
+        </a>
+
+    </div>
+
+</body>
+
+</html>

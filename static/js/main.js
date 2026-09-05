@@ -1,0 +1,1 @@
+console.log("SkillScout AI loaded successfully.");
