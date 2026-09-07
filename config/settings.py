@@ -25,8 +25,11 @@ SECRET_KEY = 'django-insecure-t^p2dl!)bz!1@qw3sd$%&2e=xsx-+p91&nrpb4q%@l-98im@60
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = [
+    "skillscout-ai-acsr.onrender.com",
+    "localhost",
+    "127.0.0.1",
+]
 
 # Application definition
 
