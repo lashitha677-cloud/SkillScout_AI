@@ -1,0 +1,399 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Join SkillScout AI</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background:
+                radial-gradient(circle at 15% 20%, rgba(108, 92, 231, 0.18), transparent 30%),
+                radial-gradient(circle at 85% 80%, rgba(114, 230, 161, 0.08), transparent 28%),
+                #070b16;
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 30px 20px;
+        }
+
+        .page {
+            width: 100%;
+            max-width: 1050px;
+            min-height: 650px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            background: rgba(11, 17, 32, 0.92);
+            border: 1px solid #202941;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.45);
+        }
+
+        /* LEFT SIDE */
+
+        .intro {
+            padding: 65px 55px;
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(108, 92, 231, 0.16),
+                    rgba(7, 11, 22, 0.15)
+                );
+            border-right: 1px solid #202941;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .brand {
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+            margin-bottom: 55px;
+        }
+
+        .brand span {
+            color: #8879ff;
+        }
+
+        .badge {
+            display: inline-flex;
+            width: fit-content;
+            padding: 8px 14px;
+            border-radius: 30px;
+            background: rgba(108, 92, 231, 0.12);
+            border: 1px solid rgba(136, 121, 255, 0.25);
+            color: #a79cff;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 22px;
+        }
+
+        .intro h1 {
+            font-size: 42px;
+            line-height: 1.12;
+            letter-spacing: -1.2px;
+            margin-bottom: 20px;
+        }
+
+        .intro h1 span {
+            color: #8879ff;
+        }
+
+        .intro-text {
+            color: #9ca7bd;
+            font-size: 15px;
+            line-height: 1.8;
+            max-width: 430px;
+            margin-bottom: 35px;
+        }
+
+        .benefits {
+            display: flex;
+            flex-direction: column;
+            gap: 17px;
+        }
+
+        .benefit {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            color: #dce2ef;
+            font-size: 14px;
+        }
+
+        .check {
+            width: 27px;
+            height: 27px;
+            border-radius: 50%;
+            background: rgba(114, 230, 161, 0.1);
+            border: 1px solid rgba(114, 230, 161, 0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #72e6a1;
+            font-size: 13px;
+        }
+
+        /* RIGHT SIDE */
+
+        .register-section {
+            padding: 55px 55px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .register-heading {
+            margin-bottom: 32px;
+        }
+
+        .register-heading h2 {
+            font-size: 28px;
+            margin-bottom: 9px;
+        }
+
+        .register-heading p {
+            color: #8d98ae;
+            font-size: 14px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            color: #d9deea;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 14px 15px;
+            border-radius: 10px;
+            border: 1px solid #273149;
+            background: #0b1120;
+            color: #ffffff;
+            outline: none;
+            font-size: 14px;
+            transition: 0.2s ease;
+        }
+
+        .form-group input::placeholder {
+            color: #59657c;
+        }
+
+        .form-group input:focus {
+            border-color: #6c5ce7;
+            box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.12);
+        }
+
+        .errorlist {
+            list-style: none;
+            color: #ff8585;
+            font-size: 12px;
+            margin-top: 6px;
+        }
+
+        .form-error {
+            padding: 12px 14px;
+            border-radius: 9px;
+            background: rgba(255, 133, 133, 0.08);
+            border: 1px solid rgba(255, 133, 133, 0.2);
+            color: #ff9999;
+            font-size: 13px;
+            margin-bottom: 18px;
+        }
+
+        .register-button {
+            width: 100%;
+            border: none;
+            padding: 15px;
+            border-radius: 10px;
+            background: #6c5ce7;
+            color: white;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s ease;
+            margin-top: 5px;
+        }
+
+        .register-button:hover {
+            background: #8879ff;
+            transform: translateY(-1px);
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 24px;
+            color: #7f8aa1;
+            font-size: 13px;
+        }
+
+        .login-link a {
+            color: #9b8fff;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+
+        .security-note {
+            text-align: center;
+            color: #59657c;
+            font-size: 11px;
+            margin-top: 22px;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 800px) {
+            .page {
+                grid-template-columns: 1fr;
+            }
+
+            .intro {
+                padding: 40px 30px;
+                border-right: none;
+                border-bottom: 1px solid #202941;
+            }
+
+            .brand {
+                margin-bottom: 35px;
+            }
+
+            .intro h1 {
+                font-size: 32px;
+            }
+
+            .register-section {
+                padding: 40px 30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="page">
+
+    <!-- LEFT INFORMATION PANEL -->
+
+    <section class="intro">
+
+        <div class="brand">
+            Skill<span>Scout</span> AI
+        </div>
+
+        <div class="badge">
+            STUDENT TALENT PLATFORM
+        </div>
+
+        <h1>
+            Build your profile.<br>
+            <span>Discover opportunities.</span>
+        </h1>
+
+        <p class="intro-text">
+            Create your SkillScout profile and showcase the skills,
+            projects and certifications that make you stand out.
+        </p>
+
+        <div class="benefits">
+
+            <div class="benefit">
+                <div class="check">✓</div>
+                Build your digital skill profile
+            </div>
+
+            <div class="benefit">
+                <div class="check">✓</div>
+                Showcase projects and certifications
+            </div>
+
+            <div class="benefit">
+                <div class="check">✓</div>
+                Discover opportunities matching your skills
+            </div>
+
+            <div class="benefit">
+                <div class="check">✓</div>
+                Get notified about eligible opportunities
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- REGISTRATION FORM -->
+
+    <section class="register-section">
+
+        <div class="register-heading">
+            <h2>Create your account</h2>
+            <p>Join SkillScout AI as a student</p>
+        </div>
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            {% if form.non_field_errors %}
+                <div class="form-error">
+                    {{ form.non_field_errors }}
+                </div>
+            {% endif %}
+
+            <div class="form-group">
+                <label for="{{ form.username.id_for_label }}">
+                    Username
+                </label>
+
+                {{ form.username }}
+
+                {{ form.username.errors }}
+            </div>
+
+
+            <div class="form-group">
+                <label for="{{ form.email.id_for_label }}">
+                    Email address
+                </label>
+
+                {{ form.email }}
+
+                {{ form.email.errors }}
+            </div>
+
+
+            <div class="form-group">
+                <label for="{{ form.password.id_for_label }}">
+                    Password
+                </label>
+
+                {{ form.password }}
+
+                {{ form.password.errors }}
+            </div>
+
+
+            <div class="form-group">
+                <label for="{{ form.confirm_password.id_for_label }}">
+                    Confirm password
+                </label>
+
+                {{ form.confirm_password }}
+
+                {{ form.confirm_password.errors }}
+            </div>
+
+
+            <button type="submit" class="register-button">
+                Create Student Account
+            </button>
+
+        </form>
+
+
+        <div class="login-link">
+            Already have an

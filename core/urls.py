@@ -1,6 +1,6 @@
 from django.urls import path
 from django.contrib.auth import views as auth_views
-from .views import landing, login_view, skill_passport, edit_profile
+from .views import landing, login_view, skill_passport, edit_profile, student_register
 from .ai_views import ai_assistant
 from . import views
 
@@ -8,6 +8,7 @@ from . import views
 urlpatterns = [
     path("", landing, name="landing"),
     path("login/", login_view, name="login"),
+    path("register/", student_register, name="student_register"),
     path("logout/", auth_views.LogoutView.as_view(), name="logout"),
     path("student/dashboard/", views.student_dashboard, name="student_dashboard"),
     path("student/skills/", skill_passport, name="skill_passport"),

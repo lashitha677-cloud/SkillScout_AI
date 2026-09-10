@@ -2,12 +2,27 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from .models import StudentProject
 from django.utils import timezone
+
+from .models import (
+    Profile,
+    StudentSkill,
+    StudentProject,
+    StudentCertification,
+    Opportunity,
+    Notification,
+)
+
+from .forms import (
+    StudentSkillForm,
+    ProfileForm,
+    StudentProjectForm,
+    StudentCertificationForm,
+    OpportunityForm,
+    StudentRegistrationForm,
+)
+
 from .matching import check_student_eligibility
-from .models import ( Profile, StudentSkill, StudentProject,StudentCertification, Opportunity, Notification, )
-from .forms import ( StudentSkillForm, ProfileForm, StudentProjectForm,StudentCertificationForm,
-                    OpportunityForm, )
 
 def landing(request):
     return render(request, "landing.html")
@@ -665,4 +680,35 @@ def student_notifications(request):
         {
             "notifications": notifications,
         }
+    )
+
+
+def student_register(request):
+    if request.user.is_authenticated:
+        return redirect("student_dashboard")
+
+    if request.method == "POST":
+        form = StudentRegistrationForm(request.POST)
+
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.set_password(form.cleaned_data["password"])
+            user.save()
+
+            Profile.objects.create(
+                user=user,
+                role="STUDENT"
+            )
+
+            login(request, user)
+
+            return redirect("student_dashboard")
+
+    else:
+        form = StudentRegistrationForm()
+
+    return render(
+        request,
+        "auth/register.html",
+        {"form": form}
     )
