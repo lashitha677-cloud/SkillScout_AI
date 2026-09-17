@@ -182,6 +182,34 @@ class OpportunityForm(forms.ModelForm):
 
 class StudentRegistrationForm(forms.ModelForm):
 
+    full_name = forms.CharField(
+        max_length=150,
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": "Enter your full name"
+            }
+        )
+    )
+
+    department = forms.CharField(
+        max_length=100,
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": "e.g. Artificial Intelligence and Data Science"
+            }
+        )
+    )
+
+    year = forms.IntegerField(
+        min_value=1,
+        max_value=6,
+        widget=forms.NumberInput(
+            attrs={
+                "placeholder": "e.g. 3"
+            }
+        )
+    )
+
     password = forms.CharField(
         widget=forms.PasswordInput(
             attrs={

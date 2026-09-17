@@ -345,6 +345,30 @@
             {% endif %}
 
             <div class="form-group">
+    <label for="{{ form.full_name.id_for_label }}">
+        Full name
+    </label>
+    {{ form.full_name }}
+    {{ form.full_name.errors }}
+</div>
+
+<div class="form-group">
+    <label for="{{ form.department.id_for_label }}">
+        Department
+    </label>
+    {{ form.department }}
+    {{ form.department.errors }}
+</div>
+
+<div class="form-group">
+    <label for="{{ form.year.id_for_label }}">
+        Year
+    </label>
+    {{ form.year }}
+    {{ form.year.errors }}
+</div>
+
+            <div class="form-group">
                 <label for="{{ form.username.id_for_label }}">
                     Username
                 </label>
@@ -396,4 +420,17 @@
 
 
         <div class="login-link">
-            Already have an
+            Already have an account?
+            <a href="{% url 'login' %}">Login</a>
+        </div>
+
+        <div class="security-note">
+            Your information is securely stored in SkillScout AI.
+        </div>
+
+    </section>
+
+</div>
+
+</body>
+</html>

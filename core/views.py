@@ -691,14 +691,33 @@ def student_register(request):
         form = StudentRegistrationForm(request.POST)
 
         if form.is_valid():
+
             user = form.save(commit=False)
             user.set_password(form.cleaned_data["password"])
             user.save()
 
+            # Generate unique Student ID
+            last_profile = Profile.objects.filter(
+                student_id__isnull=False
+            ).order_by("-id").first()
+
+            if last_profile and last_profile.student_id:
+                last_number = int(
+                    last_profile.student_id.replace("SS2026", "")
+                )
+                new_number = last_number + 1
+            else:
+                new_number = 1
+
+            student_id = f"SS2026{new_number:03d}"
+
             Profile.objects.create(
                 user=user,
-                role="STUDENT"
-            )
+                student_id=student_id,
+                role="STUDENT",
+                department=form.cleaned_data["department"],
+                year=form.cleaned_data["year"]
+                )
 
             login(request, user)
 

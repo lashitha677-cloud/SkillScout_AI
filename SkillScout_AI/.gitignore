@@ -182,3 +182,4 @@ cython_debug/
 
 # Django collected static files
 staticfiles/
+

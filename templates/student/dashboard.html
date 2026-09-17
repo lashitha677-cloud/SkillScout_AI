@@ -331,18 +331,27 @@
 
     <section class="welcome">
 
-        <span>STUDENT DASHBOARD</span>
+    <span>STUDENT DASHBOARD</span>
 
-        <h1>
-            Welcome, {{ request.user.username }} 👋
-        </h1>
+    <h1>
+        Welcome, {{ request.user.username }} 👋
+    </h1>
 
-        <p>
-            Manage your skills, projects and certifications
-            and discover opportunities matched to you.
-        </p>
+    <p>
+        Manage your skills, projects and certifications
+        and discover opportunities matched to you.
+    </p>
 
-    </section>
+    <p style="
+        margin-top: 12px;
+        color: #a79cff;
+        font-weight: bold;
+        font-size: 13px;
+    ">
+        Student ID: {{ profile.student_id }}
+    </p>
+
+</section>
 
 
     <!-- STATISTICS -->
